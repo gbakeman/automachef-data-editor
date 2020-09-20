@@ -24,17 +24,10 @@ namespace AutomachefDataEditor
 			//return Convert.ToBase64String(Encoding.ASCII.GetBytes(SystemInfo.deviceUniqueIdentifier));
 		}
 
-		/// <summary>
-		/// Generates the platform-dependant password that is used in conjuction with en/decrypting data.
-		/// </summary>
-		/// <returns>A string that is the password salt with the platform UID appended to it.</returns>
-		static string GetPassword()
+		public static string Decrypt(string CipherText, string platformUID, string Salt = "the salty tears provide thy nourishment", string HashAlgorithm = "SHA1", int PasswordIterations = 2, int KeySize = 256)
 		{
-			return PASSWORD_SALT + GetPlatformUID();
-		}
+			string password = PASSWORD_SALT + platformUID; //Previous GetPassword algorithm inlined
 
-		public static string Decrypt(string CipherText, string password = "", string Salt = "the salty tears provide thy nourishment", string HashAlgorithm = "SHA1", int PasswordIterations = 2, int KeySize = 256)
-		{
 			if (string.IsNullOrEmpty(CipherText))
 			{
 				return "";
@@ -45,10 +38,7 @@ namespace AutomachefDataEditor
 			{
 				return CipherText;
 			}
-			if (string.IsNullOrEmpty(password))
-			{
-				password = GetPassword();
-			}
+
 			int num = 0;
 			int num2 = CipherText.IndexOf(':') + 1;
 			int num3 = CipherText.IndexOf('\n');

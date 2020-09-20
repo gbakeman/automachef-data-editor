@@ -9,15 +9,20 @@
     <StackPanel>
         <Grid x:Name="LoaderGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="93*"/>
-                <ColumnDefinition Width="307*"/>
+                <ColumnDefinition Width="69*"/>
+                <ColumnDefinition Width="331*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Profile:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26"/>
-            <ComboBox x:Name="cmbBox_profile" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ProfileSelectionChanged"/>
-            <Label Content="Profile version:" Margin="10,58,77,-8"/>
-            <Label x:Name="lbl_profVersion" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+            <Label Content="Profile:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="46"/>
+            <ComboBox x:Name="cmbBox_profile" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="155" SelectionChanged="ProfileSelectionChanged" Height="22"/>
+            <Label Content="Profile version:" Margin="10,58,36,10"/>
+            <Label x:Name="lbl_profVersion" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
 
         </Grid>
-        <Grid/>
+        <StackPanel x:Name="ProfileControls" Width="800" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+            <Label Content="Encrypted Data"/>
+            <TextBlock x:Name="txt_encryptedData" Text="TextBlock" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Width="780"/>
+            <Button x:Name="btn_doDecrypt" Content="Decrypt" Click="DoDecrypt" Height="20" Width="129" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+            <TextBlock x:Name="txt_decryptedProfile" Text="TextBlock" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" HorizontalAlignment="Left" Margin="10,10,10,10"/>
+        </StackPanel>
     </StackPanel>
 </Window>

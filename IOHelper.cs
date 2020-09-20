@@ -17,10 +17,9 @@ namespace AutomachefDataEditor
     {
         private const string profileFilename = "results.automachef";
 
-        private int version;
-        MemoryStream encryptedData;
-        public int Version { get => version; set => version = value; }
-        public MemoryStream EncryptedData { get => encryptedData; set => encryptedData = value; }
+        public string ID { get; set; }
+        public int Version { get; set; }
+        public String EncryptedData { get; set; }
 
         /// <summary>
         /// Constructs a new AutomachefProfile from the given profile data.
@@ -28,15 +27,22 @@ namespace AutomachefDataEditor
         /// <param name="profilePath">The path to the profile folder (with the numeric UID).</param>
         public AutomachefProfile(string profilePath)
         {
+            ID = profilePath.Substring(profilePath.LastIndexOf('\\') + 1);
             FileInfo profileFile = new FileInfo(profilePath + "\\" + profileFilename);
+            FileStream fs = profileFile.Open(FileMode.Open, FileAccess.Read);
 
-            using (StreamReader reader = new StreamReader(profileFile.Open(FileMode.Open, FileAccess.Read)))
+            using (StreamReader reader = new StreamReader(fs))
             {
                 string readIn = reader.ReadLine();
                 if (!readIn.Substring(0, 4).Equals("Ver:"))
                     return;
-                version = Int32.Parse(readIn[4].ToString());
+                Version = Int32.Parse(readIn[4].ToString());
+                fs.Position = 0;
+                reader.DiscardBufferedData();
+                EncryptedData = reader.ReadToEnd();
             }
+
+            fs.Dispose();
         }
     }
 }

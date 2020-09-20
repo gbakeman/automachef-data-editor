@@ -3,17 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-//using System.Windows.Shapes;
 
 namespace AutomachefDataEditor
 {
@@ -34,6 +25,14 @@ namespace AutomachefDataEditor
             Dispatcher.BeginInvoke(new Action(LoadProfileInfo));
         }
 
+        private void DoDecrypt(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(delegate
+           {
+               txt_decryptedProfile.Text = Encryption.Decrypt(selectedProfile.EncryptedData, selectedProfile.ID);
+           }));
+        }
+
         /// <summary>
         /// Background thread to get the available profiles.
         /// </summary>
@@ -49,6 +48,7 @@ namespace AutomachefDataEditor
                 }
             }
 
+            //TODO: Implement browse function
             cmbBox_profile.Items.Add("Browse...");
             cmbBox_profile.SelectedIndex = 0;
             return;
@@ -62,6 +62,7 @@ namespace AutomachefDataEditor
         {
             selectedProfile = new AutomachefProfile((string) cmbBox_profile.SelectedItem);
             lbl_profVersion.Content = selectedProfile.Version;
+            txt_encryptedData.Text = selectedProfile.EncryptedData;
         }
     }
 }
