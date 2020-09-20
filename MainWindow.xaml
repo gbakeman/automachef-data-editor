@@ -1,0 +1,23 @@
+﻿<Window x:Class="AutomachefDataEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutomachefDataEditor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="565" Width="800">
+    <StackPanel>
+        <Grid x:Name="LoaderGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="93*"/>
+                <ColumnDefinition Width="307*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Profile:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26"/>
+            <ComboBox x:Name="cmbBox_profile" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ProfileSelectionChanged"/>
+            <Label Content="Profile version:" Margin="10,58,77,-8"/>
+            <Label x:Name="lbl_profVersion" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+
+        </Grid>
+        <Grid/>
+    </StackPanel>
+</Window>
