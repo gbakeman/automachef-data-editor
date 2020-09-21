@@ -18,11 +18,25 @@
             <Label x:Name="lbl_profVersion" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
 
         </Grid>
-        <StackPanel x:Name="ProfileControls" Width="800" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-            <Label Content="Encrypted Data"/>
-            <TextBlock x:Name="txt_encryptedData" Text="TextBlock" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Width="780"/>
-            <Button x:Name="btn_doDecrypt" Content="Decrypt" Click="DoDecrypt" Height="20" Width="129" HorizontalAlignment="Left" Margin="10,10,0,0"/>
-            <TextBlock x:Name="txt_decryptedProfile" Text="TextBlock" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" HorizontalAlignment="Left" Margin="10,10,10,10"/>
-        </StackPanel>
+        <Grid x:Name="ProfileGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="ProfileDetailsStack" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Margin="143,0,-123,-8" Grid.Column="1">
+                <Label Content="Encrypted Data"/>
+                <TextBlock x:Name="txt_encryptedData" Text="TextBlock" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Width="780"/>
+                <Button x:Name="btn_doDecrypt" Content="Decrypt" Click="DoDecrypt" Height="20" Width="129" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+                <TextBlock x:Name="txt_decryptedProfile" Text="TextBlock" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" HorizontalAlignment="Left" Margin="10,10,10,10"/>
+            </StackPanel>
+            <StackPanel x:Name="ProfileControlsStack" Height="99" VerticalAlignment="Top">
+                <ListBox x:Name="lstBx_profileContents" Height="100" Width="91">
+                    <ListBoxItem Content="test"/>
+                </ListBox>
+            </StackPanel>
+        </Grid>
     </StackPanel>
 </Window>
