@@ -17,6 +17,7 @@ namespace AutomachefDataEditor
         public string ID { get; set; }
         public int Version { get; set; }
         public String EncryptedData { get; set; }
+        public ProfileContents contents { get; }
 
         /// <summary>
         /// Constructs a new AutomachefProfile from the given profile data.
@@ -40,6 +41,8 @@ namespace AutomachefDataEditor
             }
 
             fs.Dispose();
+
+            contents = new ProfileContents(profilePath);
         }
     }
 
@@ -47,21 +50,18 @@ namespace AutomachefDataEditor
     /// Represents a file found within a profile (a level, blueprint, or the profile its self, etc.)
     /// Generally encrypted, but can also be plain text.
     /// </summary>
-    class ProfileItem
+    public class ProfileItem
     {
         public FileInfo FileObject { get; set; }
         //public bool IsEncrypted { get; }
 
-        public ProfileItem(string filePath)
-        {
-            FileObject = new FileInfo(filePath);
-        }
+        public ProfileItem(string filePath) => FileObject = new FileInfo(filePath);
     }
 
     /// <summary>
     /// Maintains a list of files within the profile, meant to be displayed in a ListView.
     /// </summary>
-    class ProfileContents
+    public class ProfileContents
     {
         public ObservableCollection<ProfileItem> ProfileItems { get; }
 
@@ -73,18 +73,16 @@ namespace AutomachefDataEditor
             {
                 ProfileItems.Add(new ProfileItem(file));
             }
-
-            
         }
 
-        private static string[] GetDirectoryContents(string path, string[] files = null)
+        public static List<string> GetDirectoryContents(string path, List<string> files = null)
         {
             if (files == null)
-                files = new string[] { };
+                files = new List<string>();
 
             foreach (string file in Directory.GetFiles(path))
             {
-                files.Append<string>(file);
+                files.Add(file);
             }
 
             foreach (string dir in Directory.GetDirectories(path))

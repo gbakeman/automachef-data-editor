@@ -22,6 +22,7 @@ namespace AutomachefDataEditor
 
         private void ProfileSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //TODO: Handle Browse... action.
             Dispatcher.BeginInvoke(new Action(LoadProfileInfo));
         }
 
@@ -60,9 +61,17 @@ namespace AutomachefDataEditor
         /// </summary>
         private void LoadProfileInfo()
         {
+            lstBx_profileContents.Items.Clear();
+
             selectedProfile = new AutomachefProfile((string) cmbBox_profile.SelectedItem);
             lbl_profVersion.Content = selectedProfile.Version;
             txt_encryptedData.Text = selectedProfile.EncryptedData;
+
+            //Populate list of profile items
+            foreach (ProfileItem item in selectedProfile.contents.ProfileItems)
+            {
+                lstBx_profileContents.Items.Add(item);
+            }
         }
     }
 }
