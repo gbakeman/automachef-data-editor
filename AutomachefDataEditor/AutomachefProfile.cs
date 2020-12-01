@@ -15,6 +15,7 @@ namespace AutomachefDataEditor
         private const string profileFilename = "results.automachef";
 
         public string ID { get; set; }
+        public string Location { get; set; } //The location on the filesystem of this profile.
         public int Version { get; set; }
         public String EncryptedData { get; set; }
         public ProfileContents contents { get; }
@@ -25,7 +26,9 @@ namespace AutomachefDataEditor
         /// <param name="profilePath">The path to the profile folder (with the numeric UID).</param>
         public AutomachefProfile(string profilePath)
         {
-            ID = profilePath.Substring(profilePath.LastIndexOf('\\') + 1);
+            int finalSeparator = profilePath.LastIndexOf('\\');
+            Location = profilePath.Substring(0, finalSeparator);
+            ID = profilePath.Substring(finalSeparator + 1);
             FileInfo profileFile = new FileInfo(profilePath + "\\" + profileFilename);
             FileStream fs = profileFile.Open(FileMode.Open, FileAccess.Read);
 
