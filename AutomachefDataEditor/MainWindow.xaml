@@ -6,8 +6,13 @@
         xmlns:local="clr-namespace:AutomachefDataEditor"
         mc:Ignorable="d"
         Title="MainWindow" Height="565" Width="800">
-    <StackPanel>
-        <Grid x:Name="LoaderGrid" Height="79">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="LoaderGrid" Height="79" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="90"/>
                 <ColumnDefinition/>
@@ -22,7 +27,7 @@
             </StackPanel>
 
         </Grid>
-        <Grid x:Name="ProfileGrid">
+        <Grid x:Name="ProfileGrid" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -42,5 +47,8 @@
                 </ListBox>
             </StackPanel>
         </Grid>
-    </StackPanel>
+        <Grid x:Name="CommandGrid" Height="30" VerticalAlignment="Bottom" Grid.Row="2">
+            <Button x:Name="btn_decryptAll" Content="Decrypt All" HorizontalAlignment="Right" Margin="0,5,5,5" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
 </Window>

@@ -47,6 +47,14 @@ namespace AutomachefDataEditor
 
             contents = new ProfileContents(profilePath);
         }
+
+        /// <summary>
+        /// Decrypt all data associated with this profile.
+        /// </summary>
+        public void DecryptAll()
+        {
+            DirectoryInfo newProfileFolder = Directory.CreateDirectory(Location + "\\" + ID + "_new");
+        }
     }
 
     /// <summary>
